@@ -16,7 +16,7 @@
 - ไฟล์ที่แตะ: backend/app/db/models.py, backend/app/db/migrations/001_init.py, backend/app/config.py
 - ต้องทำหลัง: ไม่มี
 - เสร็จเมื่อ: migration สร้างตาราง slots, bookings, audit_logs และ schema เก็บเฉพาะ HN ได้แล้ว
-- สถานะ: พร้อมทำ
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ### T-02 ตรวจยืนยันตัวตนก่อนเข้าถึงข้อมูล
 - รองรับ: IF-IDP-01

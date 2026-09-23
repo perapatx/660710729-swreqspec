@@ -53,3 +53,12 @@
 - สรุป: แบ่งงานตามลำดับพึ่งพาเป็นหลังบ้านก่อน หน้าจอหลังจากนั้น และยึด AC ใน spec ครบทุกข้อ พร้อมแยก task สำหรับ Q-02 ที่ยังไม่สามารถตัดสินใจได้จนกว่าจะได้รับคำตอบจากเจ้าหน้าที่เวชระเบียน
 
 ---
+
+## [2026-09-23] [เวลา 00:02] คำสั่ง: /implement T-01
+
+- เครื่องมือ: Copilot ใน Codespaces
+- ไฟล์ที่สร้างหรือแก้: backend/app/config.py, backend/app/db/models.py, backend/app/db/migrations/001_init.py, backend/tests/test_db_schema.py
+- ผล test: `cd backend && pytest tests/test_db_schema.py -q` -> 1 passed in 0.32s
+- สิ่งที่เกือบต้องเดาแต่ถามแทน: ไม่มี; task นี้มีข้อมูลครบถ้วนจาก spec และ plan ไม่มีการเดาเพิ่มเติม
+
+---
