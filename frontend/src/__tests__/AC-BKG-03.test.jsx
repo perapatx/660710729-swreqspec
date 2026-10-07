@@ -16,6 +16,6 @@ test('AC-BKG-03 ช่วงเวลาเต็ม แจ้งผู้ใช
   render(<ConfirmBooking api={fullApi} slot={{ id: 1, slot_date: '2026-10-09', start_time: '09:00' }} />)
   fireEvent.click(screen.getByText('ยืนยันการจอง'))
   const alert = await screen.findByRole('alert')
-  expect(alert.textContent).toContain('เต็ม')
-  expect(screen.getAllByText('เลือกช่วงนี้').length).toBeGreaterThan(0)
+  expect(alert.textContent).toContain('ช่วงเวลาเต็ม')
+  expect(screen.getAllByText('เลือกช่วงนี้').length).toBe(3)
 })
