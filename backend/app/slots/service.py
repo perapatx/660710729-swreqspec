@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.db.models import Slot
 
-DAYS_AHEAD = 14  # แสดงช่วงเวลาล่วงหน้า (FR-BKG-01)
+DAYS_AHEAD = 30  # แสดงช่วงเวลาล่วงหน้าตาม FR-BKG-01 (30 วัน)
 
 
 def list_available_slots(db: Session, package_code: str, date_from: date | None = None) -> list[Slot]:

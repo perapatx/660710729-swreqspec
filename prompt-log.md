@@ -73,3 +73,21 @@
 - สรุป: ผลรวม 5 ผ่าน 0 ไม่ผ่าน
 - ข้อค้นพบใหม่: F-001 ตัวเลขไม่ตรง spec (FR-BKG-01 ใช้ 14 วันแทน 30 วัน), F-002 FR ไม่มี AC (FR-BKG-06), F-003 ละเมิด Constraint (national_id ถูกส่งและ log), F-004 test อ่อน (AC-BKG-01 ไม่ตรวจ Then ครบ)
 - รายงาน RTM: specs/001-booking/rtm.md ถูกสร้างใหม่พร้อมตารางตามรอยไปข้างหน้าและย้อนกลับ
+
+---
+
+## 2569-10-07 09:10 คำสั่ง: แก้ F-001 และ F-003 ตาม rtm.md
+
+- โหมด: แก้หัวข้อข้อค้นพบที่เกี่ยวข้องเฉพาะไฟล์ที่เกี่ยวข้อง
+- การแก้ไข: backend/app/slots/service.py ปรับ DAYS_AHEAD จาก 14 เป็น 30 เพื่อให้ตรงกับ FR-BKG-01; backend/app/booking/router.py เอาฟิลด์ national_id และบรรทัด log ออกเพื่อไม่เก็บข้อมูลบัตรประชาชนตาม IF-HIS-01 และ DOM-PDPA-01
+- ไม่แก้: test ที่ชื่อขึ้นต้นด้วย test_TC_ และไม่แก้ test_AC_BKG_01.py เนื่องจากข้อค้นพบ F-004 เป็นปัญหาของ test ไม่ใช่ production code
+- ผล: รัน `cd backend && pytest -v` แล้วผ่าน 4/4
+
+---
+
+## 2569-10-07 09:15 คำสั่ง: /verify specs/001-booking/
+
+- โหมด: ตรวจความครบหลังเพิ่ม Q-03/Q-04 และปรับ spec เป็น Draft v3
+- ผล test: backend `cd backend && pytest -v` = 4 passed, 0 failed
+- รายงาน: เก็บ Q-03 และ Q-04 เพิ่มท้าย Assumptions & Open Questions และตั้งค่าสถานะ spec เป็น Draft v3 พร้อมเพิ่มบันทึกลง specs/CHANGELOG.md
+- ข้อค้นพบที่ยังค้าง: F-002 (FR-BKG-06 ไม่มี AC) และ F-004 (test อ่อน) ยังอยู่ใน RTM โดยไม่มีการลบเพื่อรอคำตอบจากทีมและเรื่อง test ที่ต้องปรับให้อยู่ใน scope ที่ถูกต้อง
