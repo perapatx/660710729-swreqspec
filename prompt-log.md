@@ -91,3 +91,13 @@
 - ผล test: backend `cd backend && pytest -v` = 4 passed, 0 failed
 - รายงาน: เก็บ Q-03 และ Q-04 เพิ่มท้าย Assumptions & Open Questions และตั้งค่าสถานะ spec เป็น Draft v3 พร้อมเพิ่มบันทึกลง specs/CHANGELOG.md
 - ข้อค้นพบที่ยังค้าง: F-002 (FR-BKG-06 ไม่มี AC) และ F-004 (test อ่อน) ยังอยู่ใน RTM โดยไม่มีการลบเพื่อรอคำตอบจากทีมและเรื่อง test ที่ต้องปรับให้อยู่ใน scope ที่ถูกต้อง
+
+---
+
+## 2569-10-07 คำสั่ง: ปรับ AC-BKG-03.test.jsx ให้ตรง Then และแก้หน้าจอตาม UI-BKG-02
+
+- การทดสอบก่อนแก้หน้าจอ: `cd frontend && npm test` = 2 passed, 1 failed; ล้มเหลวเพราะข้อความเป็น "เต็มแล้ว" แทน "ช่วงเวลาเต็ม" (จำนวนตัวเลือกก็ยังไม่ครบ 3)
+- การแก้หน้าจอ: `frontend/src/pages/ConfirmBooking.jsx` เปลี่ยนข้อความแจ้งเต็ม แสดง alternatives ทั้งหมดตาม test 3 ตัวเลือก และนำ flow/ปุ่มยกเลิกการจองซึ่งอยู่นอก scope ออก
+- ผลหลังแก้: `cd frontend && npm test` = 3 passed, 0 failed
+- test `frontend/src/__tests__/AC-BKG-03.test.jsx` มี assertion ข้อความ "ช่วงเวลาเต็ม" และจำนวนปุ่มเลือก 3 ตามคำสั่ง; ไฟล์นี้ตรงกับ HEAD ปัจจุบัน จึงไม่ได้แก้เพิ่มหลังการตรวจ
+- สิ่งที่เกือบต้องเดา: ไม่มี; ใช้ข้อความ UI-BKG-02 และ Out of scope ใน spec ฉบับปัจจุบัน

@@ -4,7 +4,6 @@ import { useState } from 'react'
 export default function ConfirmBooking({ api, slot, onDone, onBack }) {
   const [full, setFull] = useState(null)   // ผลเมื่อช่วงเวลาเต็ม (409)
   const [booking, setBooking] = useState(null)
-  const [cancelled, setCancelled] = useState(false)
 
   async function confirm() {
     const res = await api.createBooking({ slotId: slot.id })
@@ -12,23 +11,12 @@ export default function ConfirmBooking({ api, slot, onDone, onBack }) {
     else { setBooking(res.body); onDone?.(res.body) }
   }
 
-  // ยกเลิกการจอง เผื่อผู้ใช้กดจองผิด (FR-BKG-04)
-  async function cancel() {
-    await api.cancelBooking({ bookingId: booking.booking_id })
-    setCancelled(true)
-  }
-
   if (booking) {
     return (
       <section className="mx-auto max-w-md p-4">
         <h1 className="text-xl font-bold">จองคิวตรวจสุขภาพ</h1>
-        <p className="mt-4 text-lg font-bold text-green-700">{cancelled ? 'ยกเลิกแล้ว' : 'จองสำเร็จ'}</p>
+        <p className="mt-4 text-lg font-bold text-green-700">จองสำเร็จ</p>
         <p className="mt-2">หมายเลขคิว {booking.queue_no}</p>
-        {!cancelled && (
-          <button type="button" className="mt-4 w-full rounded-xl border border-red-600 p-3 text-red-600" onClick={cancel}>
-            ยกเลิกการจอง
-          </button>
-        )}
       </section>
     )
   }
@@ -44,10 +32,10 @@ export default function ConfirmBooking({ api, slot, onDone, onBack }) {
 
       {full ? (
         <div role="alert" className="mt-4 rounded-xl border border-red-300 bg-red-50 p-3">
-          <p className="font-bold text-red-700">เต็มแล้ว</p>
+          <p className="font-bold text-red-700">ช่วงเวลาเต็ม</p>
           <p className="text-sm">ช่วง {slot.start_time} น. มีผู้จองครบแล้ว เลือกช่วงที่ว่างใกล้เคียง</p>
           <ul className="mt-2">
-            {(full.alternatives ?? []).slice(0, 2).map((a) => (
+            {(full.alternatives ?? []).map((a) => (
               <li key={a.id} className="mt-1 flex justify-between rounded-lg border bg-white p-2 text-sm">
                 <span>{a.slot_date} {a.start_time} น.</span>
                 <button type="button" className="font-bold text-teal-700" onClick={() => onBack?.(a)}>เลือกช่วงนี้</button>
