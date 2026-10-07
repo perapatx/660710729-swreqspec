@@ -63,3 +63,13 @@
 - สาเหตุที่แก้: create_booking() ตรวจว่า remaining < 0 เท่านั้น ทำให้ remaining = 0 ยังยอมจองได้
 - การแก้ไข: backend/app/booking/service.py เปลี่ยนเงื่อนไขเป็น remaining <= 0 เพื่อปฏิเสธเมื่อไม่มีที่นั่ง
 - ผล: รัน `cd backend && pytest -v` แล้วผ่านตามผลลัพธ์ด้านล่าง
+
+---
+
+## 2569-10-07 08:33 คำสั่ง: /verify specs/001-booking/
+
+- โหมด: ตรวจ requirement แบบตามรอยไปข้างหน้าและย้อนกลับ
+- ผล test: backend `cd backend && pytest -v` = 4 passed, 0 failed; frontend `cd frontend && npm test -- --run` = 1 passed, 0 failed
+- สรุป: ผลรวม 5 ผ่าน 0 ไม่ผ่าน
+- ข้อค้นพบใหม่: F-001 ตัวเลขไม่ตรง spec (FR-BKG-01 ใช้ 14 วันแทน 30 วัน), F-002 FR ไม่มี AC (FR-BKG-06), F-003 ละเมิด Constraint (national_id ถูกส่งและ log), F-004 test อ่อน (AC-BKG-01 ไม่ตรวจ Then ครบ)
+- รายงาน RTM: specs/001-booking/rtm.md ถูกสร้างใหม่พร้อมตารางตามรอยไปข้างหน้าและย้อนกลับ
